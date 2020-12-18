@@ -77,8 +77,10 @@ double omp_accumulate_atomic(size_t count)
 	for (i = 0; i < count; ++i)
 		#pragma omp atomic
             if ((i & 1) == 0)
+		#pragma omp atomic
                 sum += 1.0/(i+1.0);
             else
+		#pragma omp atomic
                 sum += -1.0/(i+1.0);
 	return sum;
 }
