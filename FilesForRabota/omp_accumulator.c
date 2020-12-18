@@ -75,12 +75,12 @@ double omp_accumulate_atomic(size_t count)
 	int i;
 	#pragma omp for
 	for (i = 0; i < count; ++i)
-		#pragma omp atomic
+		#pragma omp critical
             if ((i & 1) == 0)
-		#pragma omp atomic
+		
                 sum += 1.0/(i+1.0);
             else
-		#pragma omp atomic
+		
                 sum += -1.0/(i+1.0);
 	return sum;
 }
@@ -106,7 +106,7 @@ double omp_accumulate_critical(size_t count)
 
 double omp_accumulate_reduction_static(size_t count)
 {
-	double S;
+	double S=0;
 	int i;
 	#pragma omp parallel for reduction(+:S) schedule(static)
 	for (i = 0; i < count; ++i)
@@ -119,7 +119,7 @@ double omp_accumulate_reduction_static(size_t count)
 
 double omp_accumulate_reduction_dynamic(size_t count)
 {
-	double S;
+	double S=0;
 	int i;
 	#pragma omp parallel for reduction(+:S) schedule(dynamic)
 	for (i = 0; i < count; ++i)
