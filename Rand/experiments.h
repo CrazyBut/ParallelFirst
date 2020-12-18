@@ -11,6 +11,6 @@ typedef struct experiment_result_ {
     double speedup;
 } experiment_result;
 
-experiment_result *run_experiments(size_t count, double (*accumulate)(size_t));
-void print_experiment_results(const experiment_result *results);
-void run_experiments_for(size_t count, double (*accumulate)(size_t));
+experiment_result* run_experiments(unsigned* V, unsigned count, double (*accumulate)(unsigned*, unsigned, unsigned, unsigned), unsigned min, unsigned max);
+void print_experiment_results(const experiment_result* results);
+void run_experiments_for(unsigned* V, unsigned count, double (*accumulate)(unsigned*, unsigned, unsigned, unsigned), unsigned min, unsigned max);
